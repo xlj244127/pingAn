@@ -1,0 +1,93 @@
+.complainRefer{
+  width: 100%; height: 100%; background: #fff; padding-top: .44rem; box-sizing: border-box; overflow: hidden;
+  .page-content{
+    width: 100%; height: 100%;
+    .am-list-view-scrollview{
+      height: 100%;
+      &::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 2px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 2px;
+      }
+      .am-list-view-scrollview-content{
+        height: 100%;
+        .am-pull-to-refresh-content-wrapper{
+          min-height: 90%;
+          .am-pull-to-refresh-content{
+            //height: 100%;
+            .am-list-body{
+              //height: 100%;
+              .list-view-section-body{
+                //height: 100%;
+              }
+            }
+          }
+        }
+      }
+      .ali{
+        width: 100%; height: .85rem; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; padding: 0 .14rem; border-bottom: 1px solid #f4f4f4;
+        .ali_left{
+          flex: 1; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+          .left_top{
+            font-size: .16rem; color: #333; font-family: PingFangSC-Regular; padding-top: .02rem;
+          }
+          .left_bottom{
+            font-size: .12rem; color: #999; margin-top: .1rem; font-family: PingFangSC-Regular;
+          }
+        }
+        .ali_right{
+          position: relative; width: .67rem; height: .85rem; margin-left: 10px;
+          .statu{
+            width: .67rem; height: .25rem; line-height: .25rem; text-align: center; border-radius: .02rem;
+            font-size: .14rem; margin-top: .33rem;
+            // 办理中
+            &.handling{
+              color: #27A5F9;
+            }
+            // 已办结
+            &.shutdownYes{
+              color: #66D14B;
+            }
+            // 未受理
+            &.shutdownNo{
+              color: #FF4D54;
+            }
+            // 待受理
+            &.upload{
+              color: #FA7E03 ;
+            }
+          }
+          .status-wrapper{
+            position: absolute;
+            left: 0;
+            top: 0.33rem;
+            width: .67rem;
+            height: .25rem;
+            border-radius: .03rem;
+            opacity: 0.15;
+            &.handling{
+              background: #27A5F9;
+              border-color: #27A5F9;
+            }
+            &.shutdownYes{
+              background: #66D14B;
+              border-color: #66D14B;
+            }
+            &.shutdownNo{
+              background: #FF4D54;
+              border-color: #FF4D54;
+            }
+            &.upload{
+              background: #FA7E03;
+              border-color: #FA7E03;
+            }
+          }
+        }
+      }
+      .am-list-footer{
+        >div{
+          padding: 0!important;
+        }
+      }
+    }
+  }
+}

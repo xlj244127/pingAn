@@ -1,0 +1,226 @@
+.reportDetail{
+  width: 100%; height: 100%; background: #fff; padding-top: .44rem; box-sizing: border-box; overflow: hidden;
+  .head{
+    width: 100%; height: .44rem; line-height: .44rem; box-sizing: border-box; padding: 0 .14rem;
+    display: flex; justify-content: space-between; position: fixed; left: 0; top: 0; z-index: 1000;
+    background: #fff; border-bottom: 1px solid #f4f4f4;
+    .left{
+      width: .3rem; height: .44rem;
+      img{
+        width: .17rem; height: .17rem; margin-top: .15rem;
+      }
+    }
+    .center{
+      font-size: .18rem; color: #333; font-weight: 700;
+    }
+    .right{
+      font-size: .15rem; color: #333;
+    }
+  }
+  .page-content {
+    width: 100%; height: 100%; overflow: auto; -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {/*滚动条整体样式*/
+      display: none;
+    }
+    .info{
+      width: 100%; height: .53rem; line-height: .53rem; box-sizing: border-box; padding: 0 .14rem; display: flex;
+      border-bottom: 1px solid #f4f4f4;
+      .info_left{
+        font-size: .18rem; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .info_center{
+
+      }
+      .info_right{
+        width: .67rem; height: .53rem; position: relative;
+        .statu{
+          width: .64rem; height: .22rem; line-height: .22rem; text-align: center; border-radius: .02rem;
+          font-size: .14rem; margin-top: .15rem;
+          // 办理中
+          &.handling{
+            color: #27A5F9;
+          }
+          // 已办结
+          &.shutdownYes{
+            color: #66D14B;
+          }
+          // 未受理
+          &.shutdownNo{
+            color: #FF4D54;
+          }
+          // 待受理
+          &.upload{
+            color: #FA7E03 ;
+          }
+        }
+        .status-wrapper{
+          position: absolute;
+          left: 0;
+          top: 0.14rem;
+          width: .64rem;
+          height: .22rem;
+          border-radius: .03rem;
+          opacity: 0.15;
+          &.handling{
+            background: #27A5F9;
+            border-color: #27A5F9;
+          }
+          &.shutdownYes{
+            background: #66D14B;
+            border-color: #66D14B;
+          }
+          &.shutdownNo{
+            background: #FF4D54;
+            border-color: #FF4D54;
+          }
+          &.upload{
+            background: #FA7E03;
+            border-color: #FA7E03;
+          }
+        }
+      }
+    }
+    .detail {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 .14rem;
+      .title {
+        width: 100%;
+        height: .2rem;
+        margin-top: .22rem;
+        border-left: 2px solid #27A5F9;
+        font-size: .18rem;
+        color: #333;
+        font-weight: bold;
+        box-sizing: border-box;
+        padding-left: .1rem;
+      }
+      .other {
+        .time {
+          width: 100%;
+          display: flex;
+          font-size: .15rem;
+          .timeKey {
+            width: .8rem;
+            line-height: .22rem;
+            color: #999;
+          }
+          .timeVal {
+            flex: 1;
+            line-height: .22rem;
+            color: #333;
+          }
+        }
+        .marg {
+          margin-top: .2rem;
+        }
+        .marg2 {
+          margin-top: .12rem;
+        }
+        .showtext{
+          width: 100%;
+          display: flex;
+          font-size: .15rem;
+          margin-top: .12rem;
+          .textleft {
+            width: .8rem;
+            line-height: .22rem;
+            color: #999;
+          }
+          .text{
+            flex: 1; width: 100%; position: relative; overflow-y: hidden;
+            .text_height{
+              width: 100%; line-height: .22rem; font-size: .15rem; color: #333; word-break: break-all;
+            }
+            .show{
+              width: 70%; display: flex; height: .24rem; display: flex; justify-content: space-between;
+              position: absolute; right: 0; bottom: 0;
+              .show_left{
+                width: 70%; background: -webkit-linear-gradient(left, rgba(255,255,255,0),rgba(255,255,255,1));
+              }
+              .show_right{
+                flex: 1; width: 100%; line-height: .24rem; background: #fff; display: flex; justify-content: space-between;
+                .one{
+                  transform: translateY(.04rem);
+                }
+                .two{
+                  font-size: .15rem; color: #27A5F9;
+                }
+              }
+            }
+            .show2{
+              width: 100%; height: .24rem; line-height: .24rem; font-size: .15rem; color: #27A5F9; background: #fff;
+            }
+          }
+        }
+      }
+    }
+    .showPhoto{
+      width: 100%; box-sizing: border-box; padding: 0 .14rem; padding-bottom: .2rem;
+      .aul{
+        display: flex; flex-wrap: wrap;
+        .ali{
+          width: .8rem; height: .8rem; margin-right: .06rem; margin-top: .1rem; border-bottom: 1px solid #f4f4f4;
+          &:nth-of-type(4){
+            margin-right: 0;
+          }
+          img{
+            width: 100%; height: 100%;
+          }
+        }
+      }
+    }
+    .flow{
+      width: 100%; box-sizing: border-box; padding: 0 .2rem 0 .14rem; border-top: 1px solid #f4f4f4;
+      .title2{
+        width: 100%; height: .2rem; margin-top: .22rem; border-left: 2px solid #27A5F9; font-size: .18rem;
+        color: #333; font-weight: bold; box-sizing: border-box; padding-left: .1rem;
+      }
+    }
+    .rat{
+      width: 100%; box-sizing: border-box; padding: 0 .14rem;
+      .title{
+        width: 100%; height: .2rem; margin-top: .22rem; border-left: 2px solid #27A5F9; font-size: .18rem;
+        color: #333; font-weight: bold; box-sizing: border-box; padding-left: .1rem;
+      }
+      .rating{
+        width: 100%; display: flex; justify-content: space-between; font-size: .16rem; color: #666; margin-top: .18rem; margin-bottom: .15rem;
+        .rating_left{
+          display: flex; line-height: 100%;
+          .rating_name{
+            margin-right: .24rem;
+          }
+          .star{
+            margin-right: .14rem;
+            i{
+              font-size: .2rem;
+            }
+            .paicon-selected_star{
+              color: #27A5F9;
+            }
+          }
+        }
+        .rating_right{
+
+        }
+      }
+      .rating_time{
+        font-size: .12rem; color: #C7C7C7;
+      }
+      .rating_tent{
+        margin-top: .1rem; margin-bottom: .14rem; font-size: .16rem; color: #666; word-break: break-all;
+      }
+      .input{
+        width: 100%; height: 1rem;
+        textarea{
+          width: 100%; height: 100%; border: 1px solid #f4f4f4; resize: none; font-size: .15rem;
+          box-sizing: border-box; padding: .09rem .14rem; word-break: break-all;
+        }
+      }
+      .butt{
+        width: 100%; height: .45rem; line-height: .45rem; text-align: center; font-size: .18rem; color: #fff;
+        background: #27A5F9; margin: .2rem 0;
+      }
+    }
+  }
+}

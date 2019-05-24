@@ -1,0 +1,144 @@
+.home{
+  width: 100%; height: 100%; background: #fff; padding-top: .44rem; box-sizing: border-box; overflow: hidden;
+  .head{
+    position: fixed;
+    width: 100%; height: .44rem; line-height: .44rem; box-sizing: border-box; padding: 0 .14rem;
+    display: flex; justify-content: space-between; position: fixed; left: 0; top: 0; z-index: 1000;
+    background: #fff; border-bottom: 1px solid #f4f4f4;
+    .left{
+      width: .3rem; height: .44rem;
+      img{
+        width: .17rem; height: .17rem; margin-top: .15rem;
+      }
+    }
+    .center{
+      font-size: .18rem; color: #333; font-weight: 700;
+    }
+    .right{
+      font-size: .15rem; color: #333;
+    }
+  }
+  .page-content{
+    width: 100%; height: 100%; overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+    .input{
+      width: 100%; height: 1.3rem; box-sizing: border-box;
+      .am-list-item{
+        .am-textarea-control{
+          textarea{
+            height: 1rem;
+          }
+        }
+        .am-textarea-count span{
+          color: #ccc;
+        }
+      }
+    }
+    .phone{
+      width: 100%; box-sizing: border-box; padding: 0 .05rem;
+    }
+    .phone_title{
+      width: 100%; min-height: .5rem; line-height: .5rem; background: #f4f4f4; box-sizing: border-box; padding: 0 .14rem;
+      font-size: .14rem; color: #999;
+    }
+    .tagList{
+      width: 100%; height: .66rem; box-sizing: border-box; padding: 0 .14rem;
+      .tag-container{
+        width: 100%; height: 100%; display: flex; overflow-y: auto;
+        &::-webkit-scrollbar {
+          display:none
+        }
+        .tag{
+          height: .36rem; line-height: .36rem; box-sizing: border-box; padding: 0 .12rem; border: 1px solid #c7c7c7; font-size: .15rem; color: #999;
+          word-break: keep-all; margin-left: .1rem; margin-top: .15rem;
+          &:first-child{
+            margin-left: 0;
+          }
+        }
+        .active{
+          background: #27A5F9; color: #fff; border: none;
+        }
+      }
+    }
+    .line{
+      width: 100%; height: .1rem; background: #f4f4f4;
+    }
+    .info{
+      .aul .ali{
+        box-sizing: border-box; padding: 0 .14rem; width: 100%; height: .55rem; line-height: .55rem; font-size: .15rem;
+        border-bottom: 1px solid #f4f4f4; display: flex;
+        &:last-of-type{
+          border-bottom: none;
+        }
+        .ali_left{
+          color: #666; width: 1.2rem;
+        }
+        .ali_left2{
+          color: #999; width: 1.2rem;
+        }
+        .ali_right2{
+          color: #999; flex: 1; width: 100%; box-sizing: border-box; padding-right: .13rem;
+          overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .ali_right{
+          color: #333; flex: 1; width: 100%; box-sizing: border-box; padding-right: .13rem;
+          overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+          input{
+            width: 100%; height: 100%; line-height: 100%; border: none;
+          }
+        }
+        .ali_right3{
+          color: #333; flex: 1; width: 100%; position: relative; box-sizing: border-box; padding-right: .23rem;
+          overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+          .address{
+            flex: 1;
+          }
+          .gps{
+            width: .3rem; height: .55rem; text-align: right; position: absolute; right: 0; bottom: 0;
+            i{
+              font-size: .22rem; color: #27A5F9;
+            }
+            a{
+              width: 100%; height: 100%; line-height: .55rem; display: inline-block;
+            }
+          }
+        }
+      }
+    }
+    .bottom{
+      width: 100%; height: .54rem; line-height: .54rem; background: #f4f4f4;
+      .am-checkbox-agree .am-checkbox{
+        top: -.02rem;
+      }
+    }
+  }
+  .side{
+    .mengchen{
+      width: 100%; height: 100%; overflow: hidden; position: fixed; left: 0; top: 0; background: #000; opacity: .3; z-index: 1005;
+    }
+    .popout{
+      width: 78%; background: #fff; position: fixed; left: 0; top: 0; right: 0; bottom: 0; margin: auto;
+      z-index: 1100; opacity: 1; border-radius: .06rem; height: 1.56rem;
+      .top{
+        height: 1.06rem; font-size: .16rem; color: #333; box-sizing: border-box;
+        border-bottom: 1px solid #f4f4f4; display: flex; align-items: center; text-align: center;
+        .top_box{
+          .top_shan{
+            font-size: .18rem; color: #333; margin-bottom: 12px;
+          }
+          .top_xia{
+            font-size: .16rem; color: #666;
+          }
+        }
+      }
+      .bottom{
+        height: .5rem; line-height: .5rem;
+        width: 100%; font-size: .18rem; color: #27A5F9;
+      }
+    }
+  }
+
+}

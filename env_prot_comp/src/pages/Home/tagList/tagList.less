@@ -1,0 +1,19 @@
+.tag-container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  flex-direction: row;
+}
+.tag-container > div {
+  height: .36rem; line-height: .36rem;
+  margin-left: .1rem;
+  margin-top: .15rem;
+  word-break: keep-all;
+  &.active{
+    background-color: #27A5F9; font-size: .15rem; color: #fff;
+  }
+  &:first-of-type{
+    margin-left: 0;
+  }
+}

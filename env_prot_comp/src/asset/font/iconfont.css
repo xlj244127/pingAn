@@ -1,0 +1,33 @@
+@font-face {font-family: "iconfont";
+    src: url('iconfont.eot?t=1554169987366'), /* IE9 */
+    url('iconfont.ttf?t=1554169987366') format('truetype') /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.paicon-selected_star:before {
+  content: "\e68e";
+}
+
+.paicon-normal_star:before {
+  content: "\e68f";
+}
+
+.paicon-an:before {
+  content: "\e690";
+}
+
+.paicon-return:before {
+  content: "\e691";
+}
+
+.paicon-positioning:before {
+  content: "\e692";
+}
+

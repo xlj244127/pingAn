@@ -1,0 +1,95 @@
+/* 清除内外边距 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
+th, td, canvas{ /* table elements 表格元素 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 设置默认字体 */
+body,
+button, input, select, textarea { /* for ie */
+  /*font: .12rem/1 "微软雅黑", sans-serif;*/
+  font: .12rem/1 "\5FAE\8F6F\96C5\9ED1", sans-serif; /* 用 ascii 字符表示，使得在任何编码下都无问题 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 { font-size: .18rem; }
+h2 { font-size: .16rem; }
+h3 { font-size: .14rem; }
+h4, h5, h6 { font-size: 100%; }
+
+small { font-size: .12rem; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/* 重置列表元素 */
+ul, ol { list-style: none; }
+
+/* 重置文本格式元素 */
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+
+/* 重置表单元素 */
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea {
+  font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */
+}
+
+/* 重置表格元素 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input,button,input:focus,button:focus {
+	font-family: "\5FAE\8F6F\96C5\9ED1", sans-serif !important;
+	outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent; //rgba(255,255,255,0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; // rgba(255,255,255,0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.2); //rgba(255,255,255,0.43);
+}
+.showScrollBar{
+  &::-webkit-scrollbar {
+    width:8px;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
+    border-radius:6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius:6px;
+    background:rgba(0,0,0,0.1);
+    -webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background:rgba(204,204,204,0.4);
+  }
+}
+body{
+  transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
