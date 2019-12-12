@@ -12,7 +12,7 @@ export default class Swipe extends Component {
     };
   }
   componentDidMount() {
-    console.log("得到的值", this.props.location);
+    // console.log("得到的值", this.props.location);
     if (this.props.location.state.imageArray.length === 1) {
       this.setState({ isLone: false });
     } else {
@@ -20,7 +20,7 @@ export default class Swipe extends Component {
     }
   }
   render() {
-    console.log("进入了这里33333", this.state.isLone, this.state.data, this.state.selectedIndex);
+    // console.log("进入了这里33333", this.state.isLone, this.state.data, this.state.selectedIndex);
     return (
       <WingBlank
         style={{ width: "100%", height: "100%", margin: 0, padding: 0, background: "#000", overflow: "hidden" }}

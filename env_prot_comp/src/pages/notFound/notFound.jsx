@@ -1,12 +1,21 @@
-import React from "react";
+import React, { Component } from "react";
 import "./notFound.less";
 
-const NotFound = () => {
-  return (
-    <div className="not-found">
-      <div>未找到此页面</div>
-    </div>
-  );
-};
+export default class NotFound extends Component {
+  constructor({ location, history }) {
+    super(location, history);
+    // console.log("传的值", location, history);
+    this.state = {
+      text: location.state && location.state.text ? location.state.text : "未找到此页面",
+    };
+  }
 
-export default NotFound;
+  render() {
+    return (
+      <div className="not-found">
+        <div>{this.state.text}</div>
+      </div>
+    );
+  }
+}
+

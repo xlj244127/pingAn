@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>block_chain</title>
+    <desc>Created with Sketch.</desc>
+    <g id="需求修改清单0606" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4">
+            <rect id="block_chain" fill="#D8D8D8" opacity="0" x="0" y="0" width="14" height="14"></rect>
+            <g id="Group-5" transform="translate(1.000000, 1.000000)" stroke="#27A5F9">
+                <circle id="Oval" cx="1.5" cy="10.5" r="1.5"></circle>
+                <circle id="Oval-Copy" cx="3.5" cy="3.5" r="1.5"></circle>
+                <circle id="Oval-Copy" cx="8.5" cy="7.5" r="1.5"></circle>
+                <circle id="Oval-Copy" cx="10.5" cy="1.5" r="1.5"></circle>
+                <path d="" id="Path-3"></path>
+                <path d="M1.7465748,9.15499895 L3.1266453,4.98694691" id="Path-4"></path>
+                <path d="M4.5,4.58986209 L7.5,7.07097293" id="Path-5"></path>
+                <path d="M9.0281287,6.21889138 L10.202429,2.96083281" id="Path-6"></path>
+            </g>
+        </g>
+    </g>
+</svg>

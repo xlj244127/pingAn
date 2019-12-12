@@ -127,16 +127,105 @@
         border-bottom: 1px solid #f4f4f4; display: flex; align-items: center; text-align: center;
         .top_box{
           .top_shan{
-            font-size: .18rem; color: #333; margin-bottom: 12px;
+            font-size: .18rem; color: #333;
+            margin-top: .1rem;
+            margin-bottom: .25rem;
           }
           .top_xia{
-            font-size: .16rem; color: #666;
+            font-size: .12rem; color: #999;
+            @keyframes rotation{
+              from {-webkit-transform: rotate(0deg);}
+              to {-webkit-transform: rotate(360deg);}
+            }
+            img{
+              width: .14rem;
+              height: .14rem;
+              position: relative;
+              left: -.03rem;
+              top: .02rem;
+              display: inline-block;
+              transform: rotate(360deg);
+              animation: rotation 2s linear infinite;
+            }
           }
         }
       }
       .bottom{
         height: .5rem; line-height: .5rem;
         width: 100%; font-size: .18rem; color: #27A5F9;
+      }
+    }
+  }
+  .side2 {
+    position: relative;
+
+    .mengchen2 {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: #000;
+      opacity: .3;
+      z-index: 1005;
+    }
+
+    .popout2 {
+      width: 85%;
+      max-height: 2.78rem;
+      background: #fff;
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 1100;
+      opacity: 1;
+      border-radius: .06rem;
+      .rightTop{
+        position: absolute;
+        right: .1rem;
+        top: .1rem;
+        img{
+          width: .14rem;
+          height: .14rem;
+        }
+      }
+      .top2 {
+        font-size: .16rem;
+        color: #333;
+        box-sizing: border-box;
+        padding: 0 .15rem 0 .18rem;
+        .top_shan2 {
+          text-align: center;
+          font-size: .18rem;
+          color: #333;
+          margin: .23rem 0 .18rem 0;
+        }
+        .top_zhong2 {
+          font-size: .16rem;
+          color: #333;
+          line-height: .25rem;
+        }
+      }
+      .bottom2{
+        height: .5rem; line-height: .5rem;
+        width: 100%; font-size: .18rem; color: #27A5F9;
+        border-top: 1px solid #f4f4f4;
+        margin-top: .15rem;
+        .bottom2-box{
+          width: 50%;
+          text-align: center;
+        }
+        .box-left{
+          border-right: 1px solid #f4f4f4;
+          color: #999;
+        }
+        .box-right{
+          color: #27A5F9;
+        }
       }
     }
   }

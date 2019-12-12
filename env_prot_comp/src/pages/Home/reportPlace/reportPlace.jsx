@@ -20,6 +20,7 @@ export default class ReportPlace extends Component {
     }],
     isFirstTime: true,
     bounds: [113.667745922, 22.364291739, 114.727367497, 22.93907434], // 地图范围设置在深圳市
+    cantonCode: ""  // 区的名字
   };
 
   componentDidMount() {
@@ -74,7 +75,7 @@ export default class ReportPlace extends Component {
   nearBy = (point) => {
     this.placeSearch.searchNearBy("", point, 500, (status, result) => {
       if (status === "complete" && result.info === "OK") {
-        console.log("one", status, result);
+        // console.log("one", status, result);
         const suggestion = result.poiList.pois;
         const latitude = suggestion[0].location.lat;
         const longitude = suggestion[0].location.lng;
@@ -94,12 +95,13 @@ export default class ReportPlace extends Component {
 
   tipAction = () => {
     this.autocomplete.search(this.state.keyword, (status, result) => {
-      console.log("two", status, result);
+      // console.log("two", status, result);
       if (status === "complete" && result.info === "OK") {
         this.map.getCity((info) => {
-          console.log("区域", info);
+          // console.log("区域", info);
           const city = info.city + info.district;
-          this.setState({ city });
+          const cantonCode = info.district;
+          this.setState({ city, cantonCode });
         });
         const latitude = result.tips[0].location.lat;
         const longitude = result.tips[0].location.lng;
@@ -113,11 +115,12 @@ export default class ReportPlace extends Component {
     });
   }
   selectedAction = (e) => {
-    console.log("选中", e);
+    // console.log("选中", e);
     this.map.getCity((info) => {
-      console.log("区域", info);
+      // console.log("区域", info);
       const city = info.city + info.district;
-      this.setState({ city });
+      const cantonCode = info.district;
+      this.setState({ city, cantonCode });
     });
     const latitude = e.poi.location.lat;
     const longitude = e.poi.location.lng;
@@ -127,11 +130,12 @@ export default class ReportPlace extends Component {
     this.setState({ latitude, longitude, address, name, selected: e.poi.name, keyword: null });
   }
   getCenterPoint = () => {
-    console.log("进入了这里5");
+    // console.log("进入了这里5");
     this.map.getCity((info) => {
-      console.log("区域", info);
+      // console.log("区域", info);
       const city = info.city + info.district;
-      this.setState({ city });
+      const cantonCode = info.district;
+      this.setState({ city, cantonCode });
     });
     const center = this.map.getCenter(); // 获取当前地图中心位置
     const point = [center.lng, center.lat];
@@ -147,11 +151,12 @@ export default class ReportPlace extends Component {
     });
   }
   onChange = (selected) => {
-    console.log("进入了这里2", selected);
+    // console.log("进入了这里2", selected);
     this.map.getCity((info) => {
-      console.log("区域", info);
+      // console.log("区域", info);
       const city = info.city + info.district;
-      this.setState({ city });
+      const cantonCode = info.district;
+      this.setState({ city, cantonCode });
     });
     const latitude = selected.location.lat;
     const longitude = selected.location.lng;
@@ -175,7 +180,9 @@ export default class ReportPlace extends Component {
       longitude: this.state.longitude,
       latitude: this.state.latitude,
       name: this.state.name,
+      cantonCode: this.state.cantonCode
     };
+    // console.log("的啊啊", addressInfo);
     this.props.getNewMapData(addressInfo);
   }
   render() {

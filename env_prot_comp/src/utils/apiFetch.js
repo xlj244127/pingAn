@@ -1,16 +1,16 @@
 import "whatwg-fetch";
 import commonFunc from "utils/commonFunc";
 
-let hasCommonAPI = false; // 网关前缀开关
-let hasCommonAPIInTest = false; // 本地测试也需要网关前缀时开启
+let hasCommonAPI = true; // 网关前缀开关
+let hasCommonAPIInTest = true; // 本地测试也需要网关前缀时开启
 // const AuthIP = "http://30.99.142.190:8580"; // 本地开发中登出修改密码等接口需要调用的地址
 
 // 西丽云
 // const AuthIP = "http://113.96.62.75:30005"; // 本地开发中登出修改密码等接口需要调用的地址
 
 let MyFetch = {
-  host: "http://112.74.60.217:30346" // 外网的隨手拍ip地址
-  // host: "http://192.168.192.205:30346" // 京偉本地的隨手拍ip地址
+  // host: "http://112.74.60.217:30346" // 外网的隨手拍ip地址
+  host: "http://101.89.103.29:50001" // 京偉本地的隨手拍ip地址
 };
 
 if (process.env.NODE_ENV === "production") { // 打包编译时，自动设置host为空，网关前缀为true

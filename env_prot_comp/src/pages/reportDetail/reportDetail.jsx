@@ -3,6 +3,7 @@ import StepLine from "./stepLine/stepLine";
 import moment from "moment";
 import { Toast } from "antd-mobile";
 import MyFetch from "utils/apiFetch";
+import HeaderBar from "common/HeaderBar/HeaderBar";
 import "./reportDetail.less";
 import { appId } from "../../config";
 
@@ -11,12 +12,11 @@ const starMapping = { 1: "满意", 2: "基本满意", 3: "不满意" };
 export default class ReportDetail extends Component {
   constructor({ location, history }) {
     super();
-    console.log("数据", location, history);
+    // console.log("数据", location, history);
     this.state = {
       isShowSwiper: false,     // 点击图片放大功能
       isShowEvaluate: false,  // 是否显示评价功能
       isRemark: false, // false(评价),true(展示评价类容)
-      isDetail: true,  // 管理部门审批流程是否有数据
       dataId: location.state.data.dataId,
       basicInfo: JSON.parse(location.state.data.data),
       timestamp: location.state.data.timestamp,
@@ -60,67 +60,62 @@ export default class ReportDetail extends Component {
 
   getReportData = (dataId) => {
     let params = { dataId: dataId };
-    console.log("dataId", dataId);
     MyFetch.post("/sz/esz/tpa/complain/platform/getUserComplainDetails", params)
       .then(res => {
-        console.log(11111, res);
-        console.log("详情页数据", res.data);
-        const last_data = res.data.data.length - 1;
-        if (last_data <= 0) {
-          this.setState({ isDetail: false });
+        if (res.data.data) {
+          const last_data = res.data.data.length - 1;
+          const firstReport = res.data.data[last_data];  // 管理部门现已处理的最后一步
+          const reportBasicInfo = res.data.data[0];              // 管理部门现已处理的第一步（展示评价的信息）
+          // console.log("第一条数据", reportBasicInfo);
+          // console.log("最后一条数据", firstReport);
+          const basicInfo = reportBasicInfo.dataMap;
+          if (!reportBasicInfo.attaInfoArray) {
+            reportBasicInfo.attaInfoArray = [];
+          }
+          const imageArray = reportBasicInfo.attaInfoArray;
+          const { attaInfoArray } = reportBasicInfo;
+          const { status } = firstReport;
+          let statusItem = {};
+          if (status.indexOf("shutdownBy") !== -1) {
+            statusItem = this.getStatusTrainslatate(status, firstReport.dataMap.currentStatusID);
+            if (statusItem.statusCode === "shutdownYes") {
+              this.setState({ isShowEvaluate: true, isRemark: false });
+            }
+          } else {
+            statusItem = this.getStatusTrainslatate(status, 0);
+          }
+          if (status.indexOf("evaluateBy") !== -1) {
+            if (firstReport.dataMap.status === 1) {
+              this.setState({ star: [1, 1, 1] });
+            }
+            if (firstReport.dataMap.status === 2) {
+              this.setState({ star: [1, 1, 0] });
+            }
+            if (firstReport.dataMap.status === 3) {
+              this.setState({ star: [1, 0, 0] });
+            }
+            res.data.data.splice(last_data, 1);
+            const starCount = firstReport.dataMap.status;
+            const content = firstReport.dataMap.content;
+            const reportTime = firstReport.timestamp * 1000;
+            this.setState({ starCount, content, reportTime, firstReport, isShowEvaluate: true, isRemark: true });
+          }
+          res.data.data && res.data.data.splice(0, 1);
+          const attendFlow = res.data.data;
+          console.log("部门处理循序", attendFlow, attendFlow.length);
+          const polllsName = reportBasicInfo.dataMap.polllsName;
+          const pollutionTypeID = reportBasicInfo.dataMap.pollutionTypeID;
+          this.setState({ basicInfo, refreshing: false, imageArray, polllsName, pollutionTypeID, reportBasicInfo, attendFlow: attendFlow.reverse(), statusItem, attaInfoArray }, () => {
+            // console.log("是否进入了这里2", this.state.attendFlow);
+            const fatherDom = document.getElementsByClassName("text")[0];
+            const childDom = document.getElementsByClassName("text_height")[0];
+            if (fatherDom.clientHeight + 1 < childDom.clientHeight) {
+              this.setState({ isExist: true });
+            }
+            // console.log(fatherDom.clientHeight, childDom.clientHeight);
+            // console.log(this.state.attaInfoArray, typeof this.state.attaInfoArray);
+          });
         }
-        const firstReport = res.data.data[last_data];  // 管理部门现已处理的最后一步
-        const reportBasicInfo = res.data.data[0];              // 管理部门现已处理的第一步（展示评价的信息）
-        console.log("第一条数据", reportBasicInfo);
-        console.log("最后一条数据", firstReport);
-        const basicInfo = reportBasicInfo.dataMap;
-        if (!reportBasicInfo.attaInfoArray) {
-          reportBasicInfo.attaInfoArray = [];
-        }
-        const imageArray = reportBasicInfo.attaInfoArray;
-        const { attaInfoArray } = reportBasicInfo;
-        const { status } = firstReport;
-        let statusItem = {};
-        if (status.indexOf("shutdownBy") !== -1) {
-          statusItem = this.getStatusTrainslatate(status, firstReport.dataMap.currentStatusID);
-          if (statusItem.statusCode === "shutdownYes") {
-            this.setState({ isShowEvaluate: true, isRemark: false });
-          }
-        } else {
-          statusItem = this.getStatusTrainslatate(status, 0);
-        }
-        if (status.indexOf("evaluateBy") !== -1) {
-          if (firstReport.dataMap.status === 1) {
-            this.setState({ star: [1, 1, 1] });
-          }
-          if (firstReport.dataMap.status === 2) {
-            this.setState({ star: [1, 1, 0] });
-          }
-          if (firstReport.dataMap.status === 3) {
-            this.setState({ star: [1, 0, 0] });
-          }
-          console.log("是否进入了这里");
-          res.data.data.splice(last_data, 1);
-          const starCount = firstReport.dataMap.status;
-          const content = firstReport.dataMap.content;
-          const reportTime = firstReport.timestamp * 1000;
-          this.setState({ starCount, content, reportTime, firstReport, isShowEvaluate: true, isRemark: true });
-        }
-        res.data.data.splice(0, 1);
-        const attendFlow = res.data.data;
-        console.log("部门处理循序", attendFlow);
-        const polllsName = reportBasicInfo.dataMap.polllsName;
-        const pollutionTypeID = reportBasicInfo.dataMap.pollutionTypeID;
-        this.setState({ basicInfo, refreshing: false, imageArray, polllsName, pollutionTypeID, reportBasicInfo, attendFlow: attendFlow.reverse(), statusItem, attaInfoArray }, () => {
-          console.log("是否进入了这里2", this.state.attendFlow);
-          const fatherDom = document.getElementsByClassName("text")[0];
-          const childDom = document.getElementsByClassName("text_height")[0];
-          if (fatherDom.clientHeight + 1 < childDom.clientHeight) {
-            this.setState({ isExist: true });
-          }
-          console.log(fatherDom.clientHeight, childDom.clientHeight);
-          console.log(reportBasicInfo, this.state.statusItem, this.state.attaInfoArray);
-        });
       });
   };
 
@@ -133,7 +128,7 @@ export default class ReportDetail extends Component {
       return { statusCode: "handling", statusName: "办理中" };
     }
     if (status.indexOf("shutdownBy") !== -1) {
-      console.log("文本2", text);
+      // console.log("文本2", text);
       if (text === "办理完成") {
         return { statusCode: "shutdownYes", statusName: "已办结" };
       } else {
@@ -146,10 +141,10 @@ export default class ReportDetail extends Component {
   };
 
   btnShow = () => {
-    const fatherDom = document.getElementsByClassName("text");
+    // const fatherDom = document.getElementsByClassName("text");
     if (this.state.isExist) {
       this.setState({ isShowText: !this.state.isShowText }, () => {
-        console.log(this.state.isShowText, fatherDom);
+        // console.log(this.state.isShowText, fatherDom);
       });
     }
   };
@@ -157,36 +152,36 @@ export default class ReportDetail extends Component {
     if (index === 0) {
       if (this.state.star[0] === 0) {
         this.setState({ star: [1, 0, 0], starCount: 3 }, () => {
-          console.log("下标值", this.state.star, this.state.starCount);
+          // console.log("下标值", this.state.star, this.state.starCount);
         });
       }
       if (this.state.star[0] === 1) {
         this.setState({ star: [0, 0, 0], starCount: 4 }, () => {
-          console.log("下标值s", this.state.star, this.state.starCount);
+          // console.log("下标值s", this.state.star, this.state.starCount);
         });
       }
     }
     if (index === 1) {
       if (this.state.star[1] === 0) {
         this.setState({ star: [1, 1, 0], starCount: 2 }, () => {
-          console.log("下标值2", this.state.star, this.state.starCount);
+          // console.log("下标值2", this.state.star, this.state.starCount);
         });
       }
       if (this.state.star[1] === 1) {
         this.setState({ star: [0, 0, 0], starCount: 4 }, () => {
-          console.log("下标值2", this.state.star, this.state.starCount);
+          // console.log("下标值2", this.state.star, this.state.starCount);
         });
       }
     }
     if (index === 2) {
       if (this.state.star[2] === 0) {
         this.setState({ star: [1, 1, 1], starCount: 1 }, () => {
-          console.log("下标值3", this.state.star, this.state.starCount);
+          // console.log("下标值3", this.state.star, this.state.starCount);
         });
       }
       if (this.state.star[2] === 1) {
         this.setState({ star: [0, 0, 0], starCount: 4 }, () => {
-          console.log("下标值3", this.state.star, this.state.starCount);
+          // console.log("下标值3", this.state.star, this.state.starCount);
         });
       }
     }
@@ -203,7 +198,7 @@ export default class ReportDetail extends Component {
     }
   };
   losefocusAction = () => {
-    console.log("触发了这个滚动事件");
+    // console.log("触发了这个滚动事件");
     window.scroll(0, document.documentElement.clientHeight);
   };
   getTextAction = (e) => {
@@ -224,15 +219,15 @@ export default class ReportDetail extends Component {
         pollutionTypeID: this.state.pollutionTypeID
       }
     };
-    console.log("参数2", params);
+    // console.log("参数2", params);
     if (!this.state.isAvalaible) return;
     this.setState({ isAvalaible: false }, () => {
       this.isLogin(() => {
         MyFetch.post("/sz/esz/tpa/complain/platform/evaluate", params)
           .then(res => {
-            console.log(2222, res);
+            // console.log(2222, res);
             if (res._success) {
-              console.log("评论结果", res);
+              // console.log("评论结果", res);
               const reportTime = new Date();
               this.setState({ reportTime, starCount: this.state.starCount, isRemark: true });
             }
@@ -241,18 +236,20 @@ export default class ReportDetail extends Component {
     });
   };
   goImagePage(index) {
-    this.props.history.push("/complainRefer/reportDetail/image", { imageArray: this.state.imageArray, index: index });
+    this.props.history.push("/tpa/complainRefer/reportDetail/image", { imageArray: this.state.imageArray, index: index });
   }
+
+  goBack = () => {
+    this.props.history.goBack();
+  }
+
   render() {
     return (
       <div className="reportDetail">
-        <div className="head">
-          <div className="left" onClick={() => this.props.history.goBack()}>
-            <i className="iconfont paicon-return"></i>
-          </div>
-          <div className="center">投诉详情</div>
-          <div className="right"></div>
-        </div>
+        <HeaderBar
+          goBack={this.goBack}
+          title="投诉详情"
+        />
         <div className="page-content">
           <div className="info">
             <div className="info_left">{`[${this.state.basicInfo.pollutionTypeID}]`}&nbsp;{this.state.basicInfo.polllsName}</div>&nbsp; &nbsp;
@@ -273,7 +270,7 @@ export default class ReportDetail extends Component {
                 <div className="timeVal">{this.state.basicInfo.address}</div>
               </div>
               <div className="showtext">
-                <div className="textleft">投诉类容</div>
+                <div className="textleft">投诉内容</div>
                 <div className="text" style={{ maxHeight: this.state.isShowText ? "initial" : ".66rem" }}>
                   <div className="text_height">{this.state.basicInfo.complainContent}</div>
                   {
@@ -303,7 +300,7 @@ export default class ReportDetail extends Component {
           <div className="showPhoto">
             <ul className="aul">
               {
-                this.state.attaInfoArray.map((item, index) => {
+                this.state.attaInfoArray && this.state.attaInfoArray.map((item, index) => {
                   return (
                     <li key={index} className="ali" onClick={() => this.goImagePage(index)}>
                       <img src={item.path} />
@@ -314,7 +311,7 @@ export default class ReportDetail extends Component {
             </ul>
           </div>
           {
-            this.state.isDetail ? <div className="flow">
+            this.state.attendFlow.length > 0 ? <div className="flow">
               <div className="title2">办理过程</div>
               <StepLine attendFlow={this.state.attendFlow} />
             </div> : ""

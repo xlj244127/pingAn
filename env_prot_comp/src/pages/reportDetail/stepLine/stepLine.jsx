@@ -11,28 +11,25 @@ export default class StepLine extends Component {
   };
 
   componentDidMount() {
-    // const textHeight = document.getElementsByClassName("text_Height")[0];
-    // console.log("高度9", textHeight.clientHeight);
+    this.isHeightAction();
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(this.props.attendFlow) !== nextProps.attendFlow) {
-      this.setState({ attendFlow: nextProps.attendFlow }, () => {
-        const fatherHeight = document.getElementsByClassName("father_height")[0];
-        const childHeight = document.getElementsByClassName("child_height")[0];
-        if (fatherHeight.clientHeight < childHeight.clientHeight) {
-          this.setState({ isShow: true });
-        }
-        console.log("高度9", fatherHeight.clientHeight, childHeight.clientHeight);
-      });
+  isHeightAction = () => {
+    const fatherHeight = document.getElementsByClassName("father_height")[0];
+    const childHeight = document.getElementsByClassName("child_height")[0];
+    if (fatherHeight.clientHeight < childHeight.clientHeight) {
+      this.setState({ isShow: true });
     }
-  }
+    // console.log("高度9", fatherHeight.clientHeight, childHeight.clientHeight);
+    // console.log("判断条件", this.state.isShow, this.state.showTime);
+  };
+
   showOrHid = () => {
     const showTime = !this.state.showTime;
     this.setState({ showTime });
   };
   render() {
-    console.log("父组件传过来的值", this.props.attendFlow);
+    // console.log("父组件传过来的值", this.props.attendFlow);
     return (
       <div>
         <div className="father_height" style={{ maxHeight: this.state.showTime ? "initial" : "1.4rem" }}>

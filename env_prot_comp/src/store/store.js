@@ -6,3 +6,4 @@ let store = createStore(
 );
 
 export default store;
+
